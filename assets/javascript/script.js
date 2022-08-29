@@ -2,23 +2,22 @@
 var DateTime = luxon.DateTime;
 var dt = DateTime.now().toFormat('cccc, dd MMMM');
 
-//creating objects of tasks
-var tasks = {
-    hour08 : "",
-    hour09 : "",
-    hour10 : "",
-    hour11 : "",
-    hour12 : "",
-    hour13 : "",
-    hour14 : "",
-    hour15 : "",
-    hour16 : "",
-    hour17 : "",
+var tasks = {};
+
+for (i = 8; i < 18; i++){
+    //stringify the "i" time
+    x = i.toString();
+    //add leading 0 if necessary
+    if (x.length < 2) {
+        x = "0" + x;
+    }
+    var newHour = "hour"+x;
+    tasks[newHour] = "";
 }
+
 
 //obtaining stored tasks
 var storedTasks = JSON.parse(localStorage.getItem(""+dt+""));
-console.log(storedTasks);
 
 //filling task object if stored
 if (storedTasks) {
@@ -68,8 +67,6 @@ $("button").on("click", function(e) {
     e.preventDefault();
     var hour = $(this).parent().attr("id");
     var newTasks = $("#"+hour).children().eq(1).val();
-    console.log(hour);
-    console.log(newTasks);
     tasks[hour] = newTasks;
     localStorage.setItem(dt, JSON.stringify(tasks));
 });
