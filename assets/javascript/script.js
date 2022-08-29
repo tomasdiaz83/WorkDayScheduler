@@ -28,6 +28,7 @@ if (storedTasks) {
 document.querySelector("#currentDay").textContent = dt;
 
 //setting current hour
+// var current = DateTime.now().toFormat('H');
 var current = DateTime.now().toFormat('H');
 
 //creating the time blocks from 9-5

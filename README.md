@@ -16,13 +16,7 @@ Web application, hosted at: https://tomasdiaz83.github.io/WorkDayScheduler/
 
 The following images show the web application's appearance and functionality:
 
-![The start page of the game.](./assets/images/01StartPage.png)
-
-![An example of a game question.](./assets/images/02QuestionExample.png)
-
-![An example of an incorrect answer.](./assets/images/03ErrorExample.png)
-
-![The game over page.](./assets/images/04GameOverPage.png)
+![Example of the scheduler used for planning a day](./assets/images/scheduler.png)
 
 ## Roadmap
 
