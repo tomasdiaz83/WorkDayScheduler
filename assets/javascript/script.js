@@ -2,6 +2,7 @@
 var DateTime = luxon.DateTime;
 var dt = DateTime.now().toFormat('cccc, dd MMMM');
 
+//creating empty object for tasks
 var tasks = {};
 
 for (i = 8; i < 18; i++){
@@ -24,13 +25,17 @@ if (storedTasks) {
     Object.assign(tasks, storedTasks);
 }
 
-//setting current date element
-document.querySelector("#currentDay").textContent = dt;
+//setting current date element and a timer to update by the minute
+document.querySelector("#currentDay").textContent = DateTime.now().toFormat('cccc, dd MMMM, t');
+var timer = setInterval (function() {
+    document.querySelector("#currentDay").textContent = DateTime.now().toFormat('cccc, dd MMMM, t');
+}, 1000);
+console.log(current);
 
 //setting current hour
 var current = DateTime.now().toFormat('H');
 
-//updatin current hour
+//updating current hour
 var timer = setInterval (function() {
     current = DateTime.now().toFormat('H');
 }, 1000);
@@ -65,6 +70,7 @@ function createTimeBlocks() {
     }
 }
 
+//Timer will update the color of the block dependent upon the time
 var colorBlock = setInterval(function() {
     for (i = 8; i < 18; i++) {
         //stringify the "i" time
