@@ -28,8 +28,13 @@ if (storedTasks) {
 document.querySelector("#currentDay").textContent = dt;
 
 //setting current hour
-// var current = DateTime.now().toFormat('H');
 var current = DateTime.now().toFormat('H');
+
+//updatin current hour
+var timer = setInterval (function() {
+    current = DateTime.now().toFormat('H');
+}, 1000);
+console.log(current);
 
 //creating the time blocks from 9-5
 function createTimeBlocks() {
@@ -45,7 +50,7 @@ function createTimeBlocks() {
         //create hour block
         $("#hour"+x).append("<div class='col-sm-1 hour'>"+DateTime.fromISO(x+':00').toFormat("h:mm a").toLowerCase()+"</div>");
         //create TextArea
-        $("#hour"+x).append('<textarea class = "col-sm-10 description"></textarea>');
+        $("#hour"+x).append('<textarea id = "text"'+x+' class = "col-sm-10 description"></textarea>');
         //fill task list from storage
         $("#hour"+x+" textarea").val(tasks["hour"+x+""]);
         //create save icon
@@ -59,6 +64,33 @@ function createTimeBlocks() {
         }
     }
 }
+
+var colorBlock = setInterval(function() {
+    for (i = 8; i < 18; i++) {
+        //stringify the "i" time
+        x = i.toString();
+        //add leading 0 if necessary
+        if (x.length < 2) {
+            x = "0" + x;
+        }
+        if (i < current) {
+            $( "#hour"+ x + " textarea" ).addClass("past");
+            $( "#hour"+ x + " textarea" ).removeClass("present");
+            $( "#hour"+ x + " textarea" ).removeClass("future");
+            console.log("test1");
+        } else if (i == current) {
+            $( "#hour"+ x + " textarea" ).removeClass("past");
+            $( "#hour"+ x + " textarea" ).addClass("present");
+            $( "#hour"+ x + " textarea" ).removeClass("future");
+            console.log("test2");
+        } else if (i > current) {
+            $( "#hour"+ x + " textarea" ).removeClass("past");
+            $( "#hour"+ x + " textarea" ).removeClass("present");
+            $( "#hour"+ x + " textarea" ).addClass("future");
+            console.log("test3");
+        }
+    }
+}, 1000);
 
 //make the scheduler blocks
 createTimeBlocks();
